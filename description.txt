@@ -1,0 +1,1 @@
+Downloads commands as well as scripts are on the server for security reasons
