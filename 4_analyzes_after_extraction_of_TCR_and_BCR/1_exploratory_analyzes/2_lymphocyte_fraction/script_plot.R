@@ -135,3 +135,4 @@ ht.estimate <- Heatmap(data,
                        row_title_side = "left",
                        row_names_side = "right",
                        row_names_gp = gpar(fontsize=10))
+
