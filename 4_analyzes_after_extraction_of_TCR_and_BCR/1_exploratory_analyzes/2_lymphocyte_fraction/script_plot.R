@@ -118,21 +118,21 @@ ht.epic <- Heatmap(data,
                    row_names_gp = gpar(fontsize=10))
 
 # -- estimate
-data <- estimate
+data <- ips
 rownames(data) <- data$ID
-data <- data[,3:ncol(data)]
+data <- data[,c(3,6,7)]
 data <- as.matrix(t(data))
 # data <- log2(data + 1) --- parei aqui
 
-ht.estimate <- Heatmap(data,
-                       top_annotation = col.ha,
-                       show_column_names = FALSE,
-                       cluster_columns = FALSE,
-                       cluster_rows = F,
-                       col=colorRamp2(breaks = seq(-0,1, length.out=9),
-                                      colors = rev(brewer.pal(9,"YlOrRd"))),
-                       row_title_gp = gpar(fontsize=10),
-                       row_title_side = "left",
-                       row_names_side = "right",
-                       row_names_gp = gpar(fontsize=10))
+ht.ips <- Heatmap(data,
+                  top_annotation = col.ha,
+                  show_column_names = FALSE,
+                  cluster_columns = FALSE,
+                  cluster_rows = F,
+                  col=colorRamp2(breaks = seq(-1,2, length.out=9),
+                                 colors = rev(brewer.pal(9,"RdGy"))),
+                  row_title_gp = gpar(fontsize=10),
+                  row_title_side = "left",
+                  row_names_side = "right",
+                  row_names_gp = gpar(fontsize=10))
 
