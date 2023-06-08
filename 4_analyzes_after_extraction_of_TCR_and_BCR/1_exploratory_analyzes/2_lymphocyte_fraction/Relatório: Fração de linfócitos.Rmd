@@ -1,0 +1,26 @@
+---
+title: "Relatório: Fração de linfócitos"
+author: "Jean Resende"
+date: "2023-06-08"
+output: pdf_document
+---
+
+# Contextualização
+A progressão do tumor e o sucesso das terapias anticancerígenas são influenciadas pela composição e a densidade das células imunes no microambiente tumoral. As técnicas recomendadas com a finalidade de estudar tais células são: citometria de fluxo, coloração imuno-histoquímica ou sequenciamento de célula única. Geralmente, bases de dados de sequenciamento de RNA (RNA-seq). Sendo asssim, torna-se necessário a aplicação de métodos computacionais para estimar a composição de células imunes a partir dos dados RNA-Seq.
+
+Há vários métodos computacionais propostos recentemente que prometem estimar a fração de células imunes em dados de sequenciamento do tipo RNA-Seq. Porém, diferentes métodos utilizam diferentes cálculos, trilham caminhos diferentes e consequentemente geram resultados que contradizem com outro método. Alguns métodos de quantificação de células imunes olham para a matriz de expressão gênica, e a partir de genes marcadores e/ou deconvulação estimam a composição celular. Outros métodos como MiXCR e TRUST4 (dentre outros) olham para o dado bruto do sequenciamento, ou seja, não olham a matriz de expressão gênica, mas sim as leituras que se alinham a região do transcriptoma referente ao receptor de células B/T por exemplo.
+
+Nosso trabalho é direcionado às células B e T a partir de dados brutos de RNA-Seq. Isso faz com que utilizemos um método que acesse as leituras brutas do sequenciamento e então estime a composição dessas células. (1) Mas será que os métodos que utilizam genes marcadores ou os que são baseados em deconvolução estimam a presença de células B e T assim como os métodos TRUST4/MiXCR que olham diretamente para o dado bruto? (2) Quais métodos podemos eutilizar em nosso trabalho, reforçando a presença de células B e T?
+
+# Metodologia
+Fiz uma revisão de literatura sobre os principais métodos de quantificação de linfócitos aplicados na imuno-oncologia. O artigo [Comprehensive evaluation of transcriptome-based cell-type quantification methods for immuno-oncology](https://academic.oup.com/bioinformatics/article/35/14/i436/5529146) foi o artigo que me debrucei mais, pois os autores avaliaram os principais métodos de quantificação de tipos celulares da imuno-oncologia. Os métodos que eles avaliaram foram: CIBERSORT, EPIC, MCP-counter, quanTIseq, TIMER e xCell. Os métodos que eles recomendaram foram: EPIC, MCP-counter, xCell e quanTIseq (https://academic.oup.com/view-large/137497314).
+
+**EPIC** e **quanTIseq** utilizam regressão de mínimos quadrados restrito para inferir frações a partir de uma matriz de assinatura e da expressão gênica em massa. Já o método **CIBERSORT** utiliza *v-Support Vector Regression* também sob uma matriz de assinatura. Já o método **MCP-counter** utiliza a expressão de genes marcadores em amostras heterogêneas, quantificando cada tipo de célula de forma independente. O **xCell** também utiliza expressão de genes marcadores, no entanto aplica um teste estatístico de enriquecimento. Tanto o quanTIseq quanto o EPIC geram pontuações relativas à quantidade total de células sequenciadas.
+
+# Resultados
+
+![Figura 1](fig_epic.pdf)
+
+
+# Discussão
+
