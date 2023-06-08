@@ -58,16 +58,17 @@ eset_acc<-count2tpm(countMat = eset_acc, idType = "Ensembl") # normalizacao em T
 eset_acc[1:5,1:5]
 
 ## -- ordenacao conforme low e high steroid
-load("metada.RData")
+load("metadata.RData")
 
-idx <- match(colnames(eset_acc),substring(metadata$barcode, 1, 16))
+idx <- match(gsub("-..R-A29S-07","",metadata$barcode),colnames(eset_acc))
 idx <- idx[!is.na(idx)]
 eset_acc <- eset_acc[,idx]
+#idx2 <- match(colnames(eset_acc),substring(metadata$barcode, 1, 16))
 
-save(eset_acc, file = "eset_acc.RData")
+save(eset_acc, file = "eset_acc_20230607.RData")
 
 ## -- assinaturas associadas ao TME - metodo PCA
-load("eset_acc.RData")
+load("eset_acc_20230607.RData")
 sig_tme <- calculate_sig_score(pdata = NULL,
                                eset = eset_acc,
                                signature = signature_tme,
@@ -112,8 +113,10 @@ quantiseq <- deconvo_tme(eset = eset_acc_tpm_log2,
 
 write.csv(quantiseq, file = "quantiseq.csv")
 
+
+################################################################################
 ### -- epic
-load("eset_acc.RData")
+load("eset_acc_20230607.RData")
 eset_acc_tpm_log2 <- log2(eset_acc+1) # transformacao em log2
 
 epic <- deconvo_tme(eset = eset_acc_tpm_log2, method = "epic", arrays = FALSE)
@@ -127,7 +130,7 @@ rowSums(epic[,-1])
 write.csv(epic, file = "epic.csv")
 
 ### -- mcpcounter
-load("eset_acc.RData")
+load("eset_acc_20230607.RData")
 eset_acc_tpm_log2 <- log2(eset_acc+1) # transformacao em log2
 
 mcp <- deconvo_tme(eset = eset_acc_tpm_log2, method = "mcpcounter")
