@@ -99,7 +99,7 @@ cibersort <- deconvo_tme(eset = eset_acc_tpm_log2, method = "cibersort", arrays 
 write.csv(cibersort, file = "cibersort.csv")
 
 ### -- quantiseq
-load("eset_acc.RData")
+load("eset_acc_20230607.RData")
 eset_acc_tpm_log2 <- log2(eset_acc+1) # transformacao em log2
 
 quantiseq <- deconvo_tme(eset = eset_acc_tpm_log2,
@@ -112,7 +112,6 @@ quantiseq <- deconvo_tme(eset = eset_acc_tpm_log2,
 #dev.off()
 
 write.csv(quantiseq, file = "quantiseq.csv")
-
 
 ################################################################################
 ### -- epic
@@ -140,7 +139,7 @@ summary(mcp)
 write.csv(mcp, file = "mcp.csv")
 
 ### -- xcell
-load("eset_acc.RData")
+load("eset_acc_20230607.RData")
 eset_acc_tpm_log2 <- log2(eset_acc+1) # transformacao em log2
 xcell <- deconvo_tme(eset_acc_tpm_log2, method = "xcell", arrays = FALSE)
 

@@ -164,14 +164,14 @@ range(data)
 data <- log2(data + 1)
 data.z <- scale(data)
 summary(data.z)
-range(data)
+range(data.z)
 
 ht.xcell <- Heatmap(data.z,
                          top_annotation = col.ha,
                          show_column_names = FALSE,
                          cluster_columns = F,
                          cluster_rows = F,
-                         col=colorRamp2(breaks = seq(0,1, length.out=9),
+                         col=colorRamp2(breaks = seq(-2,2, length.out=9),
                                         colors = rev(brewer.pal(9,"RdBu"))),
                          row_title_gp = gpar(fontsize=10),
                          row_title_side = "left",
@@ -180,3 +180,6 @@ ht.xcell <- Heatmap(data.z,
 
 head(colnames(data.z))
 head(metadata$barcode)
+################################################################################
+
+
