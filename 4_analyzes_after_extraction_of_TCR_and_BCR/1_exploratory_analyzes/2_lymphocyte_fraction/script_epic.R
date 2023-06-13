@@ -45,16 +45,9 @@ save(eset_acc, file = "eset_acc_20230607.RData")
 ################################################################################
 
 load("eset_acc_20230607.RData")
-eset_acc_tpm_log2 <- log2(eset_acc+1) # transformacao em log2
 
-res.bref <- EPIC(eset_acc, reference = BRef, withOtherCells = F)
-res_bref <- res.bref$cellFractions
-save(res_bref, file = "res_bref.RData")
-
-res.tref <- EPIC(eset_acc, reference = TRef, withOtherCells = F)
-res_tref <- res.tref$cellFractions
-save(res_tref, file = "res_tref.RData")
-
-
+res.epic <- EPIC(eset_acc, withOtherCells = F)
+res.epic <- res.epic$cellFractions
+save(res.epic, file = "res_epic.RData")
 
 

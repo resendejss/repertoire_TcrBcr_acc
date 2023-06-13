@@ -2,6 +2,7 @@
 title: "Relatório: Fração de linfócitos"
 author: "Jean Resende"
 date: "2023-06-08"
+
 output: pdf_document
 ---
 
@@ -17,9 +18,8 @@ Fiz uma revisão de literatura sobre os principais métodos de quantificação d
 
 **EPIC** e **quanTIseq** utilizam regressão de mínimos quadrados restrito para inferir frações a partir de uma matriz de assinatura e da expressão gênica em massa. Já o método **CIBERSORT** utiliza *v-Support Vector Regression* também sob uma matriz de assinatura. Já o método **MCP-counter** utiliza a expressão de genes marcadores em amostras heterogêneas, quantificando cada tipo de célula de forma independente. O **xCell** também utiliza expressão de genes marcadores, no entanto aplica um teste estatístico de enriquecimento. Tanto o quanTIseq quanto o EPIC geram pontuações relativas à quantidade total de células sequenciadas.
 
-# Resultados
 
-![Figura 1](fig_epic.pdf)
+![Figura 1](figure_01_lymphocyteFraction.pdf){width=650px}
 
 
 # Discussão

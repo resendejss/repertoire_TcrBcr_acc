@@ -70,19 +70,12 @@ rm(col.bin.cortisol,col.bin.gender,col.bin.imm_sub,col.bin.oth_horm,
    col.seqGreys.reads)
 
 # -- heatmap epic
-epic <- read.csv("epic.csv")
-rowSums(epic[,3:ncol(epic)])
-data <- epic
-rownames(data) <- data$ID
-data <- data[,3:ncol(data)]
-
+load("res_epic.RData")
+rowSums(res.epic)
+data <- res.epic
 identical(rownames(data),gsub("-..R-A29S-07","",metadata$barcode))
-
 data <- as.matrix(t(data))
-#data <- log2(data + 1)
 
-#data <- data[-8,]
-#data <- log2(data)
 range(data)
 
 ht.epic <- Heatmap(data,
@@ -97,6 +90,9 @@ ht.epic <- Heatmap(data,
                    row_names_side = "right",
                    row_names_gp = gpar(fontsize=10))
 
+head(colnames(data))
+head(metadata$barcode)
+
 # -- heatmap quantiseq
 quantiseq <- read.csv("quantiseq.csv")
 rowSums(quantiseq[,3:ncol(quantiseq)])
@@ -104,6 +100,7 @@ data <- quantiseq
 rownames(data) <- data$ID
 data <- data[,3:ncol(data)]
 data <- as.matrix(t(data))
+data <- data[-nrow(data),]
 #data <- log2(data + 1)
 range(data)
 
@@ -112,8 +109,8 @@ ht.quantiseq <- Heatmap(data,
                         show_column_names = FALSE,
                         cluster_columns = FALSE,
                         cluster_rows = F,
-                        col=colorRamp2(breaks = seq(0,1, length.out=9),
-                                       colors = brewer.pal(9,"GnBu")),
+                        col=colorRamp2(breaks = seq(0,0.3, length.out=9),
+                                       colors = brewer.pal(9,"OrRd")),
                         row_title_gp = gpar(fontsize=10),
                         row_title_side = "left",
                         row_names_side = "right",
@@ -126,7 +123,7 @@ mcp <- read.csv("mcp.csv")
 rowSums(mcp[,3:ncol(mcp)])
 data <- mcp
 rownames(data) <- data$ID
-data <- data[,3:ncol(data)]
+data <- data[,c(3,4,6)]
 data <- as.matrix(t(data))
 
 range(data)
@@ -139,7 +136,7 @@ ht.mcpcounter <- Heatmap(data.z,
                          #top_annotation = col.ha,
                          show_column_names = FALSE,
                          cluster_columns = F,
-                         cluster_rows = T,
+                         cluster_rows = F,
                          col=colorRamp2(breaks = seq(-2,2, length.out=9),
                                         colors = rev(brewer.pal(9,"RdYlBu"))),
                          row_title_gp = gpar(fontsize=10),
@@ -157,7 +154,7 @@ xcell <- read.csv("xcell.csv")
 rowSums(xcell[,3:ncol(xcell)])
 data <- xcell
 rownames(data) <- data$ID
-data <- data[,3:ncol(data)]
+data <- data[,c(6,8:16,19,40,48)]
 data <- as.matrix(t(data))
 
 range(data)
@@ -167,7 +164,7 @@ summary(data.z)
 range(data.z)
 
 ht.xcell <- Heatmap(data.z,
-                         top_annotation = col.ha,
+                         #top_annotation = col.ha,
                          show_column_names = FALSE,
                          cluster_columns = F,
                          cluster_rows = F,
@@ -180,6 +177,8 @@ ht.xcell <- Heatmap(data.z,
 
 head(colnames(data.z))
 head(metadata$barcode)
+
+ht_list = ht_list %v% ht.xcell
 ################################################################################
 
 
