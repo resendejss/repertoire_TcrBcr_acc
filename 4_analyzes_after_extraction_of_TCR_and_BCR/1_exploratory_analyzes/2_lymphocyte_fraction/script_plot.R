@@ -105,18 +105,21 @@ rownames(data) <- data$ID
 data <- data[,3:ncol(data)]
 data <- as.matrix(t(data))
 #data <- log2(data + 1)
+range(data)
 
 ht.quantiseq <- Heatmap(data,
-                        top_annotation = col.ha,
+                        #top_annotation = col.ha,
                         show_column_names = FALSE,
                         cluster_columns = FALSE,
                         cluster_rows = F,
-                        col=colorRamp2(breaks = seq(-0,1, length.out=9),
-                                       colors = brewer.pal(9,"YlOrRd")),
+                        col=colorRamp2(breaks = seq(0,1, length.out=9),
+                                       colors = brewer.pal(9,"GnBu")),
                         row_title_gp = gpar(fontsize=10),
                         row_title_side = "left",
                         row_names_side = "right",
                         row_names_gp = gpar(fontsize=10))
+
+ht_list = ht.epic %v% ht.quantiseq
 
 # -- heatmap mcpcounter
 mcp <- read.csv("mcp.csv")
@@ -133,7 +136,7 @@ summary(data.z)
 range(data)
 
 ht.mcpcounter <- Heatmap(data.z,
-                         top_annotation = col.ha,
+                         #top_annotation = col.ha,
                          show_column_names = FALSE,
                          cluster_columns = F,
                          cluster_rows = T,
@@ -147,5 +150,33 @@ ht.mcpcounter <- Heatmap(data.z,
 head(colnames(data.z))
 head(metadata$barcode)
 
+ht_list = ht_list %v% ht.mcpcounter
+
 # -- xcell
 xcell <- read.csv("xcell.csv")
+rowSums(xcell[,3:ncol(xcell)])
+data <- xcell
+rownames(data) <- data$ID
+data <- data[,3:ncol(data)]
+data <- as.matrix(t(data))
+
+range(data)
+data <- log2(data + 1)
+data.z <- scale(data)
+summary(data.z)
+range(data)
+
+ht.xcell <- Heatmap(data.z,
+                         top_annotation = col.ha,
+                         show_column_names = FALSE,
+                         cluster_columns = F,
+                         cluster_rows = F,
+                         col=colorRamp2(breaks = seq(0,1, length.out=9),
+                                        colors = rev(brewer.pal(9,"RdBu"))),
+                         row_title_gp = gpar(fontsize=10),
+                         row_title_side = "left",
+                         row_names_side = "right",
+                         row_names_gp = gpar(fontsize=10))
+
+head(colnames(data.z))
+head(metadata$barcode)
