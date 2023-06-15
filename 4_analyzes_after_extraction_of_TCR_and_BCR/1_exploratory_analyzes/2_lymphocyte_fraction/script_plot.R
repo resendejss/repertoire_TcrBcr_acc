@@ -11,6 +11,7 @@
 library(ComplexHeatmap)
 library(RColorBrewer)
 library(circlize)
+library(magrittr)
 
 # -- importar metodos de fracoes celulares
 #cibersort <- read.csv("cibersort.csv")
@@ -157,6 +158,9 @@ rownames(data) <- data$ID
 data <- data[,c(6,8:16,19,40,48)]
 data <- as.matrix(t(data))
 
+df.xcell <- as.data.frame(data)
+df.xcell$cell_type <- c("B",rep("T",9),rep("B",3))
+
 range(data)
 data <- log2(data + 1)
 data.z <- scale(data)
@@ -165,6 +169,7 @@ range(data.z)
 
 ht.xcell <- Heatmap(data.z,
                          #top_annotation = col.ha,
+                    split = df.xcell$cell_type,
                          show_column_names = FALSE,
                          cluster_columns = F,
                          cluster_rows = F,
@@ -181,4 +186,130 @@ head(metadata$barcode)
 ht_list = ht_list %v% ht.xcell
 ################################################################################
 
+# -- TRUST4
+load("v.counts.RData")
+load("d.counts.RData")
+load("j.counts.RData")
 
+### -- regiao v --
+
+## -- construcao do data.v
+data.v <- v.counts %>% as.matrix() %>% t()
+all(colnames(data.v)%in% metadata$sample_id)
+
+data.v <- log2(data.v + 1)
+
+## -- transformacao z-score
+data.v <- as.matrix(t(scale(t(data.v))))
+summary(t(data.v))
+#teste_z <- (data[1,]-mean(data[1,]))/sd(data[1,])
+#all(data[1,] == teste_z)
+
+## -- ordenacao de data - low e high steroid e total de TCR e BCR
+data.v <- data.v[,metadata$sample_id]
+data.v <- as.matrix(data.v)
+
+## -- heatmap
+### -- dados para argumentos
+df.v <- as.data.frame(data.v)
+df.v$cell_type <- c(rep("B",3),rep("T",4))
+
+ht.v <- Heatmap(data.v,
+                top_annotation = col.ha,
+                split = df.v$cell_type,
+                show_column_names = FALSE,
+                cluster_columns = FALSE,
+                cluster_rows = F,
+                col=colorRamp2(breaks = seq(-2,2, length.out=9),
+                               colors = rev(brewer.pal(9,"BrBG"))),
+                row_title = "Region V",
+                row_title_gp = gpar(fontsize=6),
+                row_title_side = "left",
+                row_names_side = "right",
+                row_names_gp = gpar(fontsize=8))
+
+rm(data.v,df.v,v.counts)
+
+### -- region D --
+
+## -- construcao do data.d
+data.d <- d.counts %>% as.matrix() %>% t()
+all(colnames(data.d)%in% metadata$sample_id)
+
+data.d <- log2(data.d + 1)
+
+## -- transformacao z-score
+data.d <- data.d[rowSums(data.d)!=0,]
+data.d <- as.matrix(t(scale(t(data.d))))
+#teste_z <- (data[1,]-mean(data[1,]))/sd(data[1,])
+#all(data[1,] == teste_z)
+
+## -- ordenacao de data - low e high steroid e total de TCR e BCR
+data.d <- data.d[,metadata$sample_id]
+data.d <- as.matrix(data.d)
+
+## -- heatmap
+### -- dados para argumentos
+df.d <- as.data.frame(data.d)
+df.d$cell_type <- c("B","T","T")
+
+ht.d <- Heatmap(data.d,
+                split = df.d$cell_type,
+                show_column_names = FALSE,
+                cluster_columns = FALSE,
+                cluster_rows = F,
+                col=colorRamp2(breaks = seq(-2,2, length.out=9),
+                               colors = rev(brewer.pal(9,"BrBG"))),
+                row_title = "Region D",
+                row_title_gp = gpar(fontsize=6),
+                row_title_side = "left",
+                row_names_side = "right",
+                row_names_gp = gpar(fontsize=8))
+
+ht_list = ht.v %v% ht.d
+draw(ht_list, merge_legends=TRUE,annotation_legend_side = "top")
+
+rm(d.counts,data.d,df.d,ht.d,ht.v)
+
+### -- region J --
+
+## -- construcao do data.j
+data.j <- j.counts %>% as.matrix() %>% t()
+all(colnames(data.j)%in% metadata$sample_id)
+
+data.j <- log2(data.j + 1)
+
+## -- transformacao z-score
+data.j <- as.matrix(t(scale(t(data.j))))
+#teste_z <- (data[1,]-mean(data[1,]))/sd(data[1,])
+#all(data[1,] == teste_z)
+
+## -- ordenacao de data - low e high steroid e total de TCR e BCR
+data.j <- data.j[,metadata$sample_id]
+data.j <- as.matrix(data.j)
+
+## -- heatmap
+### -- dados para argumentos
+df.j <- as.data.frame(data.j)
+df.j$cell_type <- c(rep("B",3),rep("T",4))
+
+ht.j <- Heatmap(data.j,
+                split = df.j$cell_type,
+                show_column_names = FALSE,
+                cluster_columns = FALSE,
+                cluster_rows = F,
+                col=colorRamp2(breaks = seq(-2,2, length.out=9),
+                               colors = rev(brewer.pal(9,"BrBG"))),
+                row_title = "Region J",
+                row_title_gp = gpar(fontsize=6),
+                row_title_side = "left",
+                row_names_side = "right",
+                row_names_gp = gpar(fontsize=8))
+
+ht_list = ht_list %v% ht.j
+draw(ht_list, merge_legends=TRUE,annotation_legend_side = "top")
+
+rm(df.j, ht.j, j.counts)
+
+ht_list2 = ht_list %v% ht.xcell
+draw(ht_list2, merge_legends=TRUE,annotation_legend_side = "top")
