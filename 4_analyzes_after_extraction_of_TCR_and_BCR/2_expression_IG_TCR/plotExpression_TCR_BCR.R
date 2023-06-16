@@ -146,7 +146,7 @@ rm(d.counts,data.d,df.d,ht.d,ht.v)
 ### -- region J --
 ## -- construcao do data.j
 load("j.normalizations.RData")
-data.j <- j.counts %>% as.matrix() %>% t()
+data.j <- data %>% as.matrix() %>% t()
 all(colnames(data.j)%in% metadata$sample_id)
 
 data.j <- log2(data.j + 1)
