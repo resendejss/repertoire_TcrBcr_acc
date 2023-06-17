@@ -100,7 +100,7 @@ ht.v <- Heatmap(data.v,
                 row_names_side = "right",
                 row_names_gp = gpar(fontsize=8))
 
-rm(data.v,df.v,v.counts)
+rm(data.v,df.v)
 
 ### -- region D --
 ## -- construcao do data.d
@@ -123,7 +123,7 @@ data.d <- as.matrix(data.d)
 ## -- heatmap
 ### -- dados para argumentos
 df.d <- as.data.frame(data.d)
-df.d$cell_type <- c(rep("B",3),rep("T",4))
+df.d$cell_type <- c("B","T","T")
 
 ht.d <- Heatmap(data.d,
                 split = df.d$cell_type,
@@ -141,7 +141,7 @@ ht.d <- Heatmap(data.d,
 ht_list = ht.v %v% ht.d
 draw(ht_list, merge_legends=TRUE,annotation_legend_side = "top")
 
-rm(d.counts,data.d,df.d,ht.d,ht.v)
+rm(data.d,df.d,ht.d,ht.v)
 
 ### -- region J --
 ## -- construcao do data.j
@@ -181,7 +181,7 @@ ht.j <- Heatmap(data.j,
 ht_list = ht_list %v% ht.j
 draw(ht_list, merge_legends=TRUE,annotation_legend_side = "top")
 
-rm(df.j, ht.j, j.counts)
+rm(df.j, ht.j)
 
 
 # -- xcell
@@ -219,4 +219,4 @@ head(metadata$barcode)
 
 ht_list = ht_list %v% ht.xcell
 
-draw(ht_list2, merge_legends=TRUE,annotation_legend_side = "top")
+draw(ht_list, merge_legends=TRUE,annotation_legend_side = "top")
