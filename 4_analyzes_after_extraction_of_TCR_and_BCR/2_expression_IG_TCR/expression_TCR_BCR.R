@@ -3,7 +3,7 @@
 #                                                                              #
 # Author: Jean Resende (jean.s.s.resende@gmail.com)                            #
 # Creation date: 2023/06/15                                                    #
-# Last update date: 2023/06/15                                                 #
+# Last update date: 2023/06/17                                                 #
 ################################################################################
 
 load("v.counts.RData")
@@ -17,13 +17,15 @@ identical(metadata$sample_id,rownames(data))
 
 boxplot(log2(data+1))
 
-data$IGK <-  data$IGK + 1 / metadata$reads
-data$IGL <-  data$IGL + 1 / metadata$reads
-data$IGH <-  data$IGH + 1 / metadata$reads
-data$TRB <-  data$TRB + 1 / metadata$reads
-data$TRA <-  data$TRA + 1 / metadata$reads
-data$TRG <-  data$TRG + 1 / metadata$reads
-data$TRD <-  data$TRD + 1 / metadata$reads
+length(rowSums(data))
+
+data$IGK <-  data$IGK / metadata$reads
+data$IGL <-  data$IGL / metadata$reads
+data$IGH <-  data$IGH / metadata$reads
+data$TRB <-  data$TRB / metadata$reads
+data$TRA <-  data$TRA / metadata$reads
+data$TRG <-  data$TRG / metadata$reads
+data$TRD <-  data$TRD / metadata$reads
 
 save(data, file = "v.normalizations.RData")
 rm(list = ls())
