@@ -3,7 +3,7 @@
 #                                                                              #
 # Author: Jean Resende (jean.s.s.resende@gmail.com)                            #
 # Creation date: 2023/06/16                                                    #
-# Last update date: 2023/06/16                                                 #
+# Last update date: 2023/06/17                                                 #
 ################################################################################
 library(ComplexHeatmap)
 library(RColorBrewer)
@@ -183,5 +183,40 @@ draw(ht_list, merge_legends=TRUE,annotation_legend_side = "top")
 
 rm(df.j, ht.j, j.counts)
 
-ht_list2 = ht_list %v% ht.xcell
+
+# -- xcell
+xcell <- read.csv("xcell.csv")
+rowSums(xcell[,3:ncol(xcell)])
+data <- xcell
+rownames(data) <- data$ID
+data <- data[,c(6,8:16,19,40,48)]
+data <- as.matrix(t(data))
+
+df.xcell <- as.data.frame(data)
+df.xcell$cell_type <- c("B",rep("T",9),rep("B",3))
+
+range(data)
+data <- log2(data + 1)
+data.z <- scale(data)
+summary(data.z)
+range(data.z)
+
+ht.xcell <- Heatmap(data.z,
+                    #top_annotation = col.ha,
+                    split = df.xcell$cell_type,
+                    show_column_names = FALSE,
+                    cluster_columns = F,
+                    cluster_rows = F,
+                    col=colorRamp2(breaks = seq(-2,2, length.out=9),
+                                   colors = rev(brewer.pal(9,"RdBu"))),
+                    row_title_gp = gpar(fontsize=10),
+                    row_title_side = "left",
+                    row_names_side = "right",
+                    row_names_gp = gpar(fontsize=10))
+
+head(colnames(data.z))
+head(metadata$barcode)
+
+ht_list = ht_list %v% ht.xcell
+
 draw(ht_list2, merge_legends=TRUE,annotation_legend_side = "top")
