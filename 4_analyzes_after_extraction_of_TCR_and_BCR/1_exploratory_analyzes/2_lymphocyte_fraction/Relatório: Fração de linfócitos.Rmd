@@ -46,7 +46,9 @@ Olhar somente as contagens de TCR e BCR sem considerar o tamanho da biblioteca (
 Apliquei a fórmula *TCR|BCR = Mi/(Ni + Mi)* sob as contagens de TCR e BCR resultantes do TRUST4. Para uma amostra i, inseri como valor Mi a contagem de um TCR/BCR. Para o valor de Ni inseri a quantidade de leituras da amostra i resultante do controle de qualidade feita pelo FastQC (um dos resultados desta ferramenta foi a quantidade de leituras sequenciadas).
 
 ## Resultados
-A Figura 3 mostra a expressão dos TCR e BCR com base no cálculo apresentado acima. É possível observar um perfil visual parecido com as contagens brutas (Figura 2). No entanto, algumas amostras, assim como algumas cadeias de receptores evidenciaram mais a expressão dos TCRs e BCRs.
-
+A Figura 3 mostra a expressão dos TCR e BCR com base no cálculo apresentado acima. É possível observar um perfil visual parecido com a contagem bruta (Figura 2). No entanto, algumas amostras, assim como algumas cadeias de receptores evidenciaram mais a expressão dos TCRs e BCRs. Também nota-se que 
 
 ![Figura 3](figure_03_expression_xcell_trust4.pdf){width=650px}
+
+## Discussão
+
