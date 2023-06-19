@@ -37,4 +37,16 @@ O xCell foi o método que mais se aproximou da extração de TCR e BCR com o TRU
 
 # Expressão de TCR e BCR
 
+## Contextualização
+Visto que o número de leituras de TCR e BCR pode depender do total de leituras do sequenciamento, defini a expressão dos receptores sendo: *TCR|BCR = Mi/(Ni + Mi)* em que i corresponde a cada amostra, M é o número de leituras que mapeiam para um BCR/TCR específico e N é o snúmero de leituras que mapeiam para qualquer outra coisa no genoma. Esse cálculo é usado para esta finalidade - expressão de BCR e TCR específicos ([Pineda et al., 2021](https://www.frontiersin.org/articles/10.3389/fimmu.2021.730746/full), [Yu et al., 2022](https://www.frontiersin.org/articles/10.3389/fimmu.2021.790119/full), [Selitsky et al., 2019](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0647-5)).
+
+Olhar somente as contagens de TCR e BCR sem considerar o tamanho da biblioteca (quantidade de leituras sequenciadas pelo RNA-Seq) pode ser algo perigoso, pois essas amostras não tem uma quantidade padronizada de tamanho de biblioteca. Sendo assim, uma amostra pode ter mais/menos contagens de TCR/BCR quando comparada a outra,  e essa diferença ser devido a quantidade de leituras a mais/menos que esta amostra tem em relação a outra.
+
+## Metodologia
+Apliquei a fórmula *TCR|BCR = Mi/(Ni + Mi)* sob as contagens de TCR e BCR resultantes do TRUST4. Para uma amostra i, inseri como valor Mi a contagem de um TCR/BCR. Para o valor de Ni inseri a quantidade de leituras da amostra i resultante do controle de qualidade feita pelo FastQC (um dos resultados desta ferramenta foi a quantidade de leituras sequenciadas).
+
+## Resultados
+A Figura 3 mostra a expressão dos TCR e BCR com base no cálculo apresentado acima. É possível observar um perfil visual parecido com as contagens brutas (Figura 2). No entanto, algumas amostras, assim como algumas cadeias de receptores evidenciaram mais a expressão dos TCRs e BCRs.
+
+
 ![Figura 3](figure_03_expression_xcell_trust4.pdf){width=650px}
