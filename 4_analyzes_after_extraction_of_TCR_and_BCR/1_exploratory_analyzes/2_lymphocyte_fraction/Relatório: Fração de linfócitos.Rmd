@@ -50,5 +50,7 @@ A Figura 3 mostra a expressão dos TCR e BCR com base no cálculo apresentado ac
 
 ![Figura 3](figure_03_expression_xcell_trust4.pdf){width=650px}
 
+![Figura 4](figure_04_boxplot.pdf){width=650px}
+
 ## Discussão
 
