@@ -3,7 +3,7 @@
 ## PROJETO = repertorio de TCR e BCR na coorte TCGA-ACC
 ##
 ## CRIACAO DO SCRIPT (data) = 31/05/23
-## ULTIMA ATUALIZACAO (data) = 31/05/23
+## ULTIMA ATUALIZACAO (data) = 20/06/2023
 ## 
 ## RESPONSAVEL = Jean Resende
 ## Big Data
@@ -167,6 +167,9 @@ data.z <- scale(data)
 summary(data.z)
 range(data.z)
 
+data.z[data.z > 2] <- 2
+data.z[data.z <(-2)] <- (-2)
+
 ht.xcell <- Heatmap(data.z,
                          #top_annotation = col.ha,
                     split = df.xcell$cell_type,
@@ -214,6 +217,9 @@ data.v <- as.matrix(data.v)
 df.v <- as.data.frame(data.v)
 df.v$cell_type <- c(rep("B",3),rep("T",4))
 
+data.v[data.v > 2] <- 2
+data.v[data.v <(-2)] <- (-2)
+
 ht.v <- Heatmap(data.v,
                 top_annotation = col.ha,
                 split = df.v$cell_type,
@@ -252,6 +258,9 @@ data.d <- as.matrix(data.d)
 ### -- dados para argumentos
 df.d <- as.data.frame(data.d)
 df.d$cell_type <- c("B","T","T")
+
+data.d[data.d > 2] <- 2
+data.d[data.d <(-2)] <- (-2)
 
 ht.d <- Heatmap(data.d,
                 split = df.d$cell_type,
@@ -292,6 +301,9 @@ data.j <- as.matrix(data.j)
 ### -- dados para argumentos
 df.j <- as.data.frame(data.j)
 df.j$cell_type <- c(rep("B",3),rep("T",4))
+
+data.j[data.j > 2] <- 2
+data.j[data.j <(-2)] <- (-2)
 
 ht.j <- Heatmap(data.j,
                 split = df.j$cell_type,
