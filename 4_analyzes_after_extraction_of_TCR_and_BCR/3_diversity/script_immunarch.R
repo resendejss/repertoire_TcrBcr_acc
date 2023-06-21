@@ -29,7 +29,7 @@ p3 <- vis(exp_cnt, .by = c("steroid"), .meta = immdata$meta)
 # sobreposicao de repertorios
 ov <- repOverlap(immdata$data)
 vis(ov, "circos", annotationTrack="grid")
-vis_heatmap2(ov, show_rownames=T, show_colnames=F)
+vis_heatmap2(ov, show_rownames=F, show_colnames=F)
 
 imm_ov1 <- repOverlap(immdata$data, .method = "public", .verbose = F)
 vis_heatmap2(imm_ov1, show_rownames=F, show_colnames=F)
@@ -39,4 +39,4 @@ imm_ov2 <- repOverlap(immdata$data, .method = "jaccard", .verbose = F)
 vis_heatmap2(imm_ov2, show_rownames=F, show_colnames=F)
 
 pr.aav <- pubRep(immdata$data, "aa+v", .verbose = F)
-
+write.csv(pr.aav, file="")

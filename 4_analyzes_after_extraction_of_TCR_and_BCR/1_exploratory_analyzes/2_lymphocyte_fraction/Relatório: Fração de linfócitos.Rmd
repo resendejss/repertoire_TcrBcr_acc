@@ -10,7 +10,7 @@ output: pdf_document
 ## Contextualização
 A progressão do tumor e o sucesso das terapias anticancerígenas são influenciadas pela composição e a densidade das células imunes no microambiente tumoral. As técnicas recomendadas com a finalidade de estudar tais células são: citometria de fluxo, coloração imuno-histoquímica ou sequenciamento de célula única. Geralmente, bases de dados de sequenciamento de RNA (RNA-seq). Sendo asssim, torna-se necessário a aplicação de métodos computacionais para estimar a composição de células imunes a partir dos dados RNA-Seq.
 
-Há vários métodos computacionais propostos recentemente que prometem estimar a fração de células imunes em dados de sequenciamento do tipo RNA-Seq. Porém, diferentes métodos utilizam diferentes cálculos, trilham caminhos diferentes e consequentemente geram resultados que contradizem com outro método. Alguns métodos de quantificação de células imunes olham para a matriz de expressão gênica, e a partir de genes marcadores e/ou deconvulação estimam a composição celular. Outros métodos como MiXCR e TRUST4 (dentre outros) olham para o dado bruto do sequenciamento, ou seja, não olham a matriz de expressão gênica, mas sim as leituras que se alinham a região do transcriptoma referente ao receptor de células B/T por exemplo.
+Há vários métodos computacionais propostos recentemente que prometem estimar a fração de células imunes em dados de sequenciamento do tipo RNA-Seq. Porém, diferentes métodos utilizam diferentes cálculos, trilham caminhos diferentes e consequentemente geram resultados que contradizem ou reforçam os resultados de outro método. Alguns métodos de quantificação de células imunes olham para a matriz de expressão gênica, e a partir de genes marcadores e/ou deconvulação estimam a composição celular. Outros métodos como MiXCR e TRUST4 (dentre outros) olham para o dado bruto do sequenciamento, ou seja, não olham a matriz de expressão gênica, mas sim as leituras que se alinham a região do transcriptoma referente ao receptor de células B/T por exemplo.
 
 Nosso trabalho é direcionado às células B e T a partir de dados brutos de RNA-Seq. Isso faz com que utilizemos um método que acesse as leituras brutas do sequenciamento e então estime a composição dessas células. (1) Mas será que os métodos que utilizam genes marcadores ou os que são baseados em deconvolução estimam a presença de células B e T assim como os métodos TRUST4/MiXCR que olham diretamente para o dado bruto? (2) Quais métodos podemos eutilizar em nosso trabalho, reforçando a presença de células B e T?
 
@@ -25,16 +25,17 @@ A extração dos TCR e BCR por meio do TRUST4 como já vimos antes foi bem suced
 
 A Figura 1 mostra o resultado desta primeira análise. Porém, não consegui retirar as células diferentes de B e T para os métodos EPIC e quanTIseq, pois são métodos que geram uma fração (variando de 0 a 1) então teria que alterar na matriz de referência, mas esses dois métodos utilizam outros objetos de referência além da matriz. No entanto, consegui remover as células diferentes de B e T para os métodos MCP-counter e xCell, pois esses métodos não geram frações, mas sim pontuações e por causa disso, posso considerar apenas as células de interesse.
 
-![Figura 1](figure_01_lymphocyteFraction.pdf){width=650px}
+![Fração e pontuação de linfócitos gerados pelos principais métodos sugeridos por Sturm et al., (2019). As colunas representam as amostras enquanto que as linhas representam anotações das amotras (primeiro bloco) e fração de linfócitos para os métodos EPIC e quanTIseq e pontuação de linfócitos para MCP-counter e xCell (segundo bloco).](figure_01_lymphocyteFraction.pdf){width=600px}
 
-O xCell mostrou um perfil interessante, mais parecido com as contagens que encontramos com o TRUST4. Apesar disso, o xCell indicou uma presença de células T e B que o TRUST4 não encontrou. O xCell separa algumas soubcategorias dessas células, isso o TRUST4 não faz. O TRUST4 encontrou mais células T em low steroid, e o xCell encontrou mais células CD8 Tcm, CD8 T e CD4 naive T. Mas o xCell apontou para uma presença maior de células CD4 Tcm para high steroid e uma presença parecida entre low steroid e high steroid (não fiz teste estatístico, são hipóteses com base na visualização).
+\newpage
+O xCell mostrou um perfil interessante, mais parecido com as contagens que encontramos com o TRUST4 (Figura 2). Apesar disso, o xCell indicou uma presença de células T e B que o TRUST4 não encontrou. O xCell separa algumas soubcategorias dessas células, isso o TRUST4 não faz. O TRUST4 encontrou mais células T em low steroid, e o xCell encontrou mais células CD8 Tcm, CD8 T e CD4 naive T. Mas o xCell apontou para uma presença maior de células CD4 Tcm para high steroid e uma presença parecida entre low steroid e high steroid (não fiz teste estatístico, são hipóteses com base na visualização).
 
-![Figura 2](figure_02_xcell_trust4.pdf){width=650px}
+![Contagens de TCR e BCR com o TRUST4 e pontuação de linfócitos com xCell. As colunas representam as amostras enquanto que as linhas representam anotações das amotras (primeiro bloco) e contagem de TCR e BCR com TRUST4 e pontuação de linfócitos com xCell (segundo bloco).  ](figure_02_xcell_trust4.pdf){width=600px}
 
 ## Discussão
 O xCell foi o método que mais se aproximou da extração de TCR e BCR com o TRUST4, comparado com os outros métodos (EPIC, quanTIseq e MCP-couter). Prefiro utilizá-lo como o método de quantificação de tipo celular baseado na matriz de expressão gênica em conjunto com o TRUST4 que olha para os dados brutos. Outro ponto que reforça esta escolha é que muitos trabalhos tem utilizado o xCell, inclusive o trabalho que o João publicou em 2021.
 
-
+\newpage
 # Expressão de TCR e BCR
 
 ## Contextualização
@@ -46,11 +47,30 @@ Olhar somente as contagens de TCR e BCR sem considerar o tamanho da biblioteca (
 Apliquei a fórmula *TCR|BCR = Mi/(Ni + Mi)* sob as contagens de TCR e BCR resultantes do TRUST4. Para uma amostra i, inseri como valor Mi a contagem de um TCR/BCR. Para o valor de Ni inseri a quantidade de leituras da amostra i resultante do controle de qualidade feita pelo FastQC (um dos resultados desta ferramenta foi a quantidade de leituras sequenciadas).
 
 ## Resultados
-A Figura 3 mostra a expressão dos TCR e BCR com base no cálculo apresentado acima. É possível observar um perfil visual parecido com a contagem bruta (Figura 2). No entanto, algumas amostras, assim como algumas cadeias de receptores evidenciaram mais a expressão dos TCRs e BCRs. Também nota-se que 
+A Figura 3 mostra a expressão dos TCR e BCR com base no cálculo apresentado acima. É possível observar um perfil visual parecido com a contagem bruta (Figura 2). No entanto, algumas amostras, assim como algumas cadeias de receptores evidenciaram mais a expressão dos TCRs e BCRs. 
 
-![Figura 3](figure_03_expression_xcell_trust4.pdf){width=650px}
+![Expressão de TCR e BCR. As colunas representam as amostras enquanto que as linhas representam anotações das amotras (primeiro bloco) e expressão de TCR e BCR sob a fórmula TCR|BCR = Mi/(Ni + Mi), em que i representa uma amostra, M a contagem de um TCR/BCR e N a quantidade de leituras.](figure_03_expression_xcell_trust4.pdf){width=600px}
 
-![Figura 4](figure_04_boxplot.pdf){width=650px}
+A diferença entre as contagens e a expressão de TCR e BCR para LSP e HSP foi significativa de acordo com o teste de Wilcoxon (Figura 4). A Firua 4 mostra a comparação das contagens e normalização sob o perfil esteroidal. Em ambas comparações (LSP_contagens X HSP_ contagens (non-normalized); LSP_expression X HSP_expression (normalized)) o LSP apresentou um valor maior.
 
+![Comparação de contagens e expressões de TCR e BCR sob o perfil esteroidal. Teste de Wilcoxon foi utilizado para comparação entre os grupos.](figure_04_boxplot.pdf){width=600px}
+
+\newpage
 ## Discussão
+
+\newpage
+# Immunarch
+
+## Contextualização
+Immunarch é um pacote R com funções específicas para análise de repertórios de receptores de células T e células B. Ele foi desenvolvido pela ImmunoMind (startup da UC Berkeley SkyDeck). Seu diferencial é a possibilidade de trabalhar com diferentes formatos resultantes dos softwares popualares de análise e pós-análise de TCR e BCR. O Immunarch possui funções para cálculos de métricas no contexto de TCR e BCR como sobreposição de repertório, estimativa de uso de genes, diversidade, rastreamento de clonótipos além de fornecer funções de plots com parâmetros de funções de gráficos que podem ser ajustadas conforme a escolha do usuário.
+
+Na etapa em que o projeto está é interessante a exploração de ferramentas e métricas usadas em análises de TCR e BCR. O immunarch tem chamado atenção, devido as métricas que ele calcula envolvendo e as funções de plots pré-configuradas. Nesta ideia comecei a executar algumas funções e plotar alguns gráficos.
+
+## Metodologia
+Executei as principais funções do pacote immunarch com métricas recomendadas. Gerei alguns gráficos mostrando a diferença entre o número de clonótipos únicos, distribuição do comprimento da região CDR3, sobreposição de clonotipos e diversidade.
+
+## Resultados
+
+![Figura 5](summary_immunarch.pdf){width=650px}
+
 
