@@ -1,7 +1,7 @@
 ---
 title: "Relatório: Fração de linfócitos - Métodos para estimar a presença de células B e T"
 author: "Jean Resende"
-date: "2023-06-08"
+date: "2023-06-21"
 
 output: pdf_document
 ---
@@ -32,7 +32,6 @@ O xCell mostrou um perfil interessante, mais parecido com as contagens que encon
 
 ![Contagens de TCR e BCR com o TRUST4 e pontuação de linfócitos com xCell. As colunas representam as amostras enquanto que as linhas representam anotações das amotras (primeiro bloco) e contagem de TCR e BCR com TRUST4 e pontuação de linfócitos com xCell (segundo bloco).  ](figure_02_xcell_trust4.pdf){width=600px}
 
-## Discussão
 O xCell foi o método que mais se aproximou da extração de TCR e BCR com o TRUST4, comparado com os outros métodos (EPIC, quanTIseq e MCP-couter). Prefiro utilizá-lo como o método de quantificação de tipo celular baseado na matriz de expressão gênica em conjunto com o TRUST4 que olha para os dados brutos. Outro ponto que reforça esta escolha é que muitos trabalhos tem utilizado o xCell, inclusive o trabalho que o João publicou em 2021.
 
 \newpage
@@ -56,9 +55,6 @@ A diferença entre as contagens e a expressão de TCR e BCR para LSP e HSP foi s
 ![Comparação de contagens e expressões de TCR e BCR sob o perfil esteroidal. Teste de Wilcoxon foi utilizado para comparação entre os grupos.](figure_04_boxplot.pdf){width=600px}
 
 \newpage
-## Discussão
-
-\newpage
 # Immunarch
 
 ## Contextualização
@@ -70,7 +66,8 @@ Na etapa em que o projeto está é interessante a exploração de ferramentas e 
 Executei as principais funções do pacote immunarch com métricas recomendadas. Gerei alguns gráficos mostrando a diferença entre o número de clonótipos únicos, distribuição do comprimento da região CDR3, sobreposição de clonotipos e diversidade.
 
 ## Resultados
+O intuito deste momento não é olhar afundo a parte biológica, mas mostrar o que o immunarch faz. Nos últimos dias desde a última reunião tenho me dedicado nas metodologias de artigos que analisaram o TCR e BCR em dados de RNA-Seq.
 
-![Figura 5](summary_immunarch.pdf){width=650px}
+![Alguns exemplos de resultados do immunarch. **A**. Número de clonótipos. **B**. Comprimento da região CDR3. **C** Distribuição do número de clonótipos e abundância. **D** Sobreposição dee repertórios. **E**. Sopreposição de repertórios com método 'público'. **F**. Sobreposição de repertórios com método Jaccard.](summary_immunarch.pdf){width=600px}
 
 

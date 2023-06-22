@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.13)  21 JUN 2023 14:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.13)  21 JUN 2023 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -411,36 +411,36 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [1
 
 {/home/jeanresende/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/jeanresende/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
-<figure_01_lymphocyteFraction.pdf, id=77, 810.35345pt x 586.71295pt>
+<figure_01_lymphocyteFraction.pdf, id=69, 810.35345pt x 586.71295pt>
 File: figure_01_lymphocyteFraction.pdf Graphic file (type pdf)
 <use figure_01_lymphocyteFraction.pdf>
 Package pdftex.def Info: figure_01_lymphocyteFraction.pdf  used on input line 164.
 (pdftex.def)             Requested size: 451.68042pt x 327.02614pt.
 [2 <./figure_01_lymphocyteFraction.pdf>]
-<figure_02_xcell_trust4.pdf, id=105, 748.54178pt x 586.67178pt>
+<figure_02_xcell_trust4.pdf, id=97, 748.54178pt x 586.67178pt>
 File: figure_02_xcell_trust4.pdf Graphic file (type pdf)
 <use figure_02_xcell_trust4.pdf>
 Package pdftex.def Info: figure_02_xcell_trust4.pdf  used on input line 186.
 (pdftex.def)             Requested size: 451.68701pt x 354.011pt.
 [3 <./figure_02_xcell_trust4.pdf>]
-<figure_03_expression_xcell_trust4.pdf, id=136, 748.54178pt x 586.67178pt>
+<figure_03_expression_xcell_trust4.pdf, id=127, 748.54178pt x 586.67178pt>
 File: figure_03_expression_xcell_trust4.pdf Graphic file (type pdf)
 <use figure_03_expression_xcell_trust4.pdf>
-Package pdftex.def Info: figure_03_expression_xcell_trust4.pdf  used on input line 255.
+Package pdftex.def Info: figure_03_expression_xcell_trust4.pdf  used on input line 252.
 (pdftex.def)             Requested size: 451.68701pt x 354.011pt.
-<figure_04_boxplot.pdf, id=137, 819.70346pt x 515.9pt>
+<figure_04_boxplot.pdf, id=128, 819.70346pt x 515.9pt>
 File: figure_04_boxplot.pdf Graphic file (type pdf)
 <use figure_04_boxplot.pdf>
-Package pdftex.def Info: figure_04_boxplot.pdf  used on input line 272.
+Package pdftex.def Info: figure_04_boxplot.pdf  used on input line 269.
 (pdftex.def)             Requested size: 451.68881pt x 284.28116pt.
 [4] [5 <./figure_03_expression_xcell_trust4.pdf>] [6 <./figure_04_boxplot.pdf>]
-<summary_immunarch.pdf, id=212, 597.50786pt x 845.04686pt>
+<summary_immunarch.pdf, id=206, 597.50786pt x 845.04686pt>
 File: summary_immunarch.pdf Graphic file (type pdf)
 <use summary_immunarch.pdf>
-Package pdftex.def Info: summary_immunarch.pdf  used on input line 321.
-(pdftex.def)             Requested size: 459.91837pt x 650.456pt.
+Package pdftex.def Info: summary_immunarch.pdf  used on input line 318.
+(pdftex.def)             Requested size: 451.6855pt x 638.8124pt.
 
-LaTeX Warning: Float too large for page by 23.97041pt on input line 323.
+LaTeX Warning: Float too large for page by 36.32681pt on input line 325.
 
 [7] [8 <./summary_immunarch.pdf>] (./Relatório--Fração-de-linfócitos.aux)
  ***********
@@ -448,21 +448,21 @@ LaTeX2e <2023-06-01>
 L3 programming layer <2023-06-05>
  ***********
 Package rerunfilecheck Info: File `Relatório--Fração-de-linfócitos.out' has not changed.
-(rerunfilecheck)             Checksum: E6D7E653EBC6CCDAE381FC7DF7186902;1693.
+(rerunfilecheck)             Checksum: 580BA4B5B72D93896A5EF058BCA07B0F;1482.
  ) 
 Here is how much of TeX's memory you used:
- 10718 strings out of 477695
- 163041 string characters out of 5830954
+ 10710 strings out of 477695
+ 162937 string characters out of 5830954
  1864759 words of memory out of 5000000
- 31010 multiletter control sequences out of 15000+600000
+ 31006 multiletter control sequences out of 15000+600000
  563698 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,6n,79p,523b,439s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,6n,79p,548b,441s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/jeanresende/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></home/jeanresende/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/jeanresende/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/jeanresende/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/jeanresende/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/jeanresende/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
-Output written on Relatório--Fração-de-linfócitos.pdf (8 pages, 1765947 bytes).
+Output written on Relatório--Fração-de-linfócitos.pdf (8 pages, 1766655 bytes).
 PDF statistics:
- 316 PDF objects out of 1000 (max. 8388607)
- 243 compressed objects within 3 object streams
- 42 named destinations out of 1000 (max. 500000)
- 138 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 306 PDF objects out of 1000 (max. 8388607)
+ 233 compressed objects within 3 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 122 words of extra memory for PDF output out of 10000 (max. 10000000)
 
