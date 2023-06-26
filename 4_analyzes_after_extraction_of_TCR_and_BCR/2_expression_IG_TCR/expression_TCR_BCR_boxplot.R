@@ -196,20 +196,12 @@ data_vdj$TRA <- data_vdj$TRA/metadata$reads[idx]
 data_vdj$TRG <- data_vdj$TRG/metadata$reads[idx]
 data_vdj$TRD <- data_vdj$TRD/metadata$reads[idx]
 
-data_vdj_log10 <- data_vdj
-data_vdj_log10[,1:7] <- log10(data_vdj_log10[,1:7]+1)
-
-data_vdj_log2 <- data_vdj
-data_vdj_log2[,1:7] <- log2(data_vdj[,1:7]+1)
-
-data_vdj_log2 <- na.omit(data_vdj_log2)
-
 data_vdj <- na.omit(data_vdj)
 
 g1 <- ggplot(data_vdj, aes(x=steroid, y=IGK, fill=steroid))+
   ggtitle("Normalized IGK")+
   geom_boxplot(width=c(0.4), lwd=0.2, outlier.size = 0.5)+
-  scale_y_continuous("Expression(log10)")+
+  scale_y_continuous("Expression(log2)")+
   scale_x_discrete("")+
   scale_fill_manual(values=c("#F8766D","#00BFC4"), 
                     labels=c("HSP (n=45)","LSP (n=30)"))+
@@ -234,6 +226,175 @@ g1 <- ggplot(data_vdj, aes(x=steroid, y=IGK, fill=steroid))+
                      label="p.format",
                      size=3)
 
+g2 <- ggplot(data_vdj, aes(x=steroid, y=IGL, fill=steroid))+
+  ggtitle("Normalized IGL")+
+  geom_boxplot(width=c(0.4), lwd=0.2, outlier.size = 0.5)+
+  scale_y_continuous("Expression(log2)")+
+  scale_x_discrete("")+
+  scale_fill_manual(values=c("#F8766D","#00BFC4"), 
+                    labels=c("HSP (n=45)","LSP (n=30)"))+
+  geom_rug(data = data_vdj[data_vdj$steroid=="LSP",], 
+           aes(x=NULL), 
+           sides=  "r",
+           colour= "#00BFC4")+
+  geom_rug(data = data_vdj[data_vdj$steroid=="HSP",], 
+           aes(x=NULL), 
+           sides=  "l",
+           colour="#F8766D")+
+  theme(legend.position = "bottom", 
+        legend.title = element_text(face="bold", size=10),
+        legend.key=element_rect(size=10, color=NA), 
+        legend.key.size=unit(8,"mm"),
+        legend.text=element_text(size=10), 
+        legend.direction = "horizontal",
+        legend.box = "horizontal" )+
+  stat_compare_means(method="wilcox.test", 
+                     label.x = c(1.3), 
+                     #label.y = 0.0005,
+                     label="p.format",
+                     size=3)
+
+g3 <- ggplot(data_vdj, aes(x=steroid, y=IGH, fill=steroid))+
+  ggtitle("Normalized IGH")+
+  geom_boxplot(width=c(0.4), lwd=0.2, outlier.size = 0.5)+
+  scale_y_continuous("Expression(log2)")+
+  scale_x_discrete("")+
+  scale_fill_manual(values=c("#F8766D","#00BFC4"), 
+                    labels=c("HSP (n=45)","LSP (n=30)"))+
+  geom_rug(data = data_vdj[data_vdj$steroid=="LSP",], 
+           aes(x=NULL), 
+           sides=  "r",
+           colour= "#00BFC4")+
+  geom_rug(data = data_vdj[data_vdj$steroid=="HSP",], 
+           aes(x=NULL), 
+           sides=  "l",
+           colour="#F8766D")+
+  theme(legend.position = "bottom", 
+        legend.title = element_text(face="bold", size=10),
+        legend.key=element_rect(size=10, color=NA), 
+        legend.key.size=unit(8,"mm"),
+        legend.text=element_text(size=10), 
+        legend.direction = "horizontal",
+        legend.box = "horizontal" )+
+  stat_compare_means(method="wilcox.test", 
+                     label.x = c(1.3), 
+                     #label.y = 0.0005,
+                     label="p.format",
+                     size=3)
+
+g4 <- ggplot(data_vdj, aes(x=steroid, y=TRA, fill=steroid))+
+  ggtitle("Normalized TRA")+
+  geom_boxplot(width=c(0.4), lwd=0.2, outlier.size = 0.5)+
+  scale_y_continuous("Expression(log2)")+
+  scale_x_discrete("")+
+  scale_fill_manual(values=c("#F8766D","#00BFC4"), 
+                    labels=c("HSP (n=45)","LSP (n=30)"))+
+  geom_rug(data = data_vdj[data_vdj$steroid=="LSP",], 
+           aes(x=NULL), 
+           sides=  "r",
+           colour= "#00BFC4")+
+  geom_rug(data = data_vdj[data_vdj$steroid=="HSP",], 
+           aes(x=NULL), 
+           sides=  "l",
+           colour="#F8766D")+
+  theme(legend.position = "bottom", 
+        legend.title = element_text(face="bold", size=10),
+        legend.key=element_rect(size=10, color=NA), 
+        legend.key.size=unit(8,"mm"),
+        legend.text=element_text(size=10), 
+        legend.direction = "horizontal",
+        legend.box = "horizontal" )+
+  stat_compare_means(method="wilcox.test", 
+                     label.x = c(1.3), 
+                     #label.y = 0.0005,
+                     label="p.format",
+                     size=3)
+
+g5 <- ggplot(data_vdj, aes(x=steroid, y=TRB, fill=steroid))+
+  ggtitle("Normalized TRB")+
+  geom_boxplot(width=c(0.4), lwd=0.2, outlier.size = 0.5)+
+  scale_y_continuous("Expression(log2)")+
+  scale_x_discrete("")+
+  scale_fill_manual(values=c("#F8766D","#00BFC4"), 
+                    labels=c("HSP (n=45)","LSP (n=30)"))+
+  geom_rug(data = data_vdj[data_vdj$steroid=="LSP",], 
+           aes(x=NULL), 
+           sides=  "r",
+           colour= "#00BFC4")+
+  geom_rug(data = data_vdj[data_vdj$steroid=="HSP",], 
+           aes(x=NULL), 
+           sides=  "l",
+           colour="#F8766D")+
+  theme(legend.position = "bottom", 
+        legend.title = element_text(face="bold", size=10),
+        legend.key=element_rect(size=10, color=NA), 
+        legend.key.size=unit(8,"mm"),
+        legend.text=element_text(size=10), 
+        legend.direction = "horizontal",
+        legend.box = "horizontal" )+
+  stat_compare_means(method="wilcox.test", 
+                     label.x = c(1.3), 
+                     #label.y = 0.0005,
+                     label="p.format",
+                     size=3)
+
+g6 <- ggplot(data_vdj, aes(x=steroid, y=TRG, fill=steroid))+
+  ggtitle("Normalized TRG")+
+  geom_boxplot(width=c(0.4), lwd=0.2, outlier.size = 0.5)+
+  scale_y_continuous("Expression(log2)")+
+  scale_x_discrete("")+
+  scale_fill_manual(values=c("#F8766D","#00BFC4"), 
+                    labels=c("HSP (n=45)","LSP (n=30)"))+
+  geom_rug(data = data_vdj[data_vdj$steroid=="LSP",], 
+           aes(x=NULL), 
+           sides=  "r",
+           colour= "#00BFC4")+
+  geom_rug(data = data_vdj[data_vdj$steroid=="HSP",], 
+           aes(x=NULL), 
+           sides=  "l",
+           colour="#F8766D")+
+  theme(legend.position = "bottom", 
+        legend.title = element_text(face="bold", size=10),
+        legend.key=element_rect(size=10, color=NA), 
+        legend.key.size=unit(8,"mm"),
+        legend.text=element_text(size=10), 
+        legend.direction = "horizontal",
+        legend.box = "horizontal" )+
+  stat_compare_means(method="wilcox.test", 
+                     label.x = c(1.3), 
+                     #label.y = 0.0005,
+                     label="p.format",
+                     size=3)
+
+g7 <- ggplot(data_vdj, aes(x=steroid, y=TRD, fill=steroid))+
+  ggtitle("Normalized TRD")+
+  geom_boxplot(width=c(0.4), lwd=0.2, outlier.size = 0.5)+
+  scale_y_continuous("Expression(log2)")+
+  scale_x_discrete("")+
+  scale_fill_manual(values=c("#F8766D","#00BFC4"), 
+                    labels=c("HSP (n=45)","LSP (n=30)"))+
+  geom_rug(data = data_vdj[data_vdj$steroid=="LSP",], 
+           aes(x=NULL), 
+           sides=  "r",
+           colour= "#00BFC4")+
+  geom_rug(data = data_vdj[data_vdj$steroid=="HSP",], 
+           aes(x=NULL), 
+           sides=  "l",
+           colour="#F8766D")+
+  theme(legend.position = "bottom", 
+        legend.title = element_text(face="bold", size=10),
+        legend.key=element_rect(size=10, color=NA), 
+        legend.key.size=unit(8,"mm"),
+        legend.text=element_text(size=10), 
+        legend.direction = "horizontal",
+        legend.box = "horizontal" )+
+  stat_compare_means(method="wilcox.test", 
+                     label.x = c(1.3), 
+                     #label.y = 0.0005,
+                     label="p.format",
+                     size=3)
+
+plot_grid(g1,g2,g3,g4,g5,g6,g7,ncol = 4, labels="AUTO")
 ################################################################################
 library(ggplot2)
 library(ggpubr)
