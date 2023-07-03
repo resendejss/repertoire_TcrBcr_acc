@@ -59,7 +59,7 @@ g1 <- ggplot(vdj, aes(x=receptor, y=count, fill=steroid))+
   scale_x_discrete("")+
   scale_fill_manual(values=c("#F8766D","#00BFC4"), 
                     labels=c("HSP (n=45)","LSP (n=30)"))+
-  theme(legend.position = "bottom", 
+  theme(legend.position = "none", 
         legend.title = element_text(face="bold", size=10),
         legend.key=element_rect(size=10, color=NA), 
         legend.key.size=unit(8,"mm"),
@@ -115,7 +115,7 @@ g2 <- ggplot(vdj, aes(x=receptor, y=count, fill=steroid))+
   scale_x_discrete("")+
   scale_fill_manual(values=c("#F8766D","#00BFC4"), 
                     labels=c("HSP (n=45)","LSP (n=30)"))+
-  theme(legend.position = "bottom", 
+  theme(legend.position = "none", 
         legend.title = element_text(face="bold", size=10),
         legend.key=element_rect(size=10, color=NA), 
         legend.key.size=unit(8,"mm"),
@@ -128,7 +128,7 @@ g2 <- ggplot(vdj, aes(x=receptor, y=count, fill=steroid))+
                      label="p.format",
                      size=3)
 
-plot_grid(g1,g2, nrow = 2, labels="AUTO")
+#plot_grid(g1,g2, nrow = 2, labels="AUTO")
 
 #data_vdj_BT <- data_vdj
 #data_vdj_BT$b <- data_vdj_BT$IGK + data_vdj_BT$IGL + data_vdj_BT$IGH
@@ -142,10 +142,64 @@ plot_grid(g1,g2, nrow = 2, labels="AUTO")
 #data_vdj_BT$bnorm <- data_vdj_BT$b/metadata$reads[idx]
 #data_vdj_BT$tnorm <- data_vdj_BT$t/metadata$reads[idx]
 
+load("../afterExtraction_trust4/data.entropy.RData")
 
+head(rownames(data.entropy))
+head(metadata$sample_id)
+head(gsub("_report","",rownames(data.entropy)))
 
+idx <- match(gsub("_report","",rownames(data.entropy)),metadata$sample_id)
 
+data.entropy$steroid <- metadata$steroid[idx]
 
+IGK <- data.entropy[,c("IGK","steroid")]
+IGL <- data.entropy[,c("IGL","steroid")]
+IGH <- data.entropy[,c("IGH","steroid")]
+TRA <- data.entropy[,c("TRA","steroid")]
+TRB <- data.entropy[,c("TRB","steroid")]
+TRG <- data.entropy[,c("TRG","steroid")]
+TRD <- data.entropy[,c("TRD","steroid")]
+
+IGK$receptor <- rep("IGK",76)
+IGL$receptor <- rep("IGL",76)
+IGH$receptor <- rep("IGH",76)
+TRA$receptor <- rep("TRA",76)
+TRB$receptor <- rep("TRB",76)
+TRG$receptor <- rep("TRG",76)
+TRD$receptor <- rep("TRD",76)
+
+colnames(IGK)[1] <- "entropy"
+colnames(IGL)[1] <- "entropy"
+colnames(IGH)[1] <- "entropy"
+colnames(TRA)[1] <- "entropy"
+colnames(TRB)[1] <- "entropy"
+colnames(TRD)[1] <- "entropy"
+colnames(TRG)[1] <- "entropy"
+
+vdj <- rbind(IGK,IGL,IGH,TRA,TRB,TRD,TRG)
+
+vdj <- na.omit(vdj)
+
+g3 <- ggplot(vdj, aes(x=receptor, y=entropy, fill=steroid))+
+  geom_boxplot(width=c(0.4), lwd=0.2, outlier.size = 0.5)+
+  scale_y_continuous("Shannon Entropy")+
+  scale_x_discrete("")+
+  scale_fill_manual(values=c("#F8766D","#00BFC4"), 
+                    labels=c("HSP","LSP"))+
+  theme(legend.position = "bottom", 
+        legend.title = element_text(face="bold", size=10),
+        legend.key=element_rect(size=10, color=NA), 
+        legend.key.size=unit(8,"mm"),
+        legend.text=element_text(size=10), 
+        legend.direction = "horizontal",
+        legend.box = "horizontal" )+
+  stat_compare_means(method="wilcox.test", 
+                     label.x = c(1.3), 
+                     #label.y = 17,
+                     label="p.format",
+                     size=3)
+
+plot_grid(g1,g2,g3, nrow = 3, labels="AUTO")
 
 
 
