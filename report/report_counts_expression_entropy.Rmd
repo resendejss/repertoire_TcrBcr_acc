@@ -1,0 +1,19 @@
+---
+title: "Relatório: Contagem, expressão  e diversidade"
+author: "Jean Resende"
+date: "2023-07-04"
+
+output: pdf_document
+---
+
+# Resultados
+
+Iniciei a avaliação da presença de TCR e BCR nos grupos LSP e HSP de ACC comparando as
+contagens brutas, ou seja, a quantidade de vezes que o TRUST4 encontrou uma mesma sequência de TCR/BCR (Figura 1A). Calculei a expressão de TCR e BCR dividindo o counts pelo número de leituras da amostra. A expressão de TCR e BCR normalizado pelo total de leituras é apresentado na FIgura 1B. Em seguida calculei a diversidade medida pela entropia de Shannon afim de considerar não apenas o número , mas também a distribuição de tamanho dos clones (Figura 1.C). 
+
+![Análise de diversidade](../figures/diversity.pdf){width=650px}
+
+
+
+
+
