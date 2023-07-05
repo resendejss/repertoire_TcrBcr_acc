@@ -120,3 +120,4 @@ corrplot(res_lsp, p.mat =  teste$p, method = "color", order = "AOE", type = "upp
 teste <- cor.mtest(hsp, conf.level=0.95)
 corrplot(res_hsp, p.mat =  teste$p, method = "color", order = "AOE", type = "upper", 
          diag = F, tl.col = "black", insig = "label_sig", pch.cex = 0.8)
+ 
