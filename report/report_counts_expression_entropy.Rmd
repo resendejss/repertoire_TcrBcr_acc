@@ -1,7 +1,7 @@
 ---
 title: "Relatório: Contagem, expressão  e diversidade"
 author: "Jean Resende"
-date: "2023-07-04"
+date: "2023-07-05"
 
 output: pdf_document
 ---
@@ -13,12 +13,18 @@ Em alguma reunião apresentei dois artigos que trabalharam com dados de RNA-Seq 
 Na última semana foquei em como apresentar a diferença de TCR e BCR em ACC considerando o grupo esteroidal (LSP=low steroid e HSP=high esteroid), assim como o artigo de referência que avaliou no primeiro momento a diferença desses receptores para tumor e não tumor. Os autores traballharam com expressão e diversidade. Para a expressão dos receptores eles definiram como *TCR|BCR = Mi/(Ni + Mi)* em que i corresponde a cada amostra, M é o número de leituras que mapeiam para um BCR/TCR específico e N é o número de leituras que mapeiam para qualquer outra coisa no transcriptoma. Esse cálculo é usado para definir a normalização da expressão desses receptores pelo total de leituras, neste e outros trabalhos ([Pineda et al., 2021](https://www.frontiersin.org/articles/10.3389/fimmu.2021.730746/full), [Yu et al., 2022](https://www.frontiersin.org/articles/10.3389/fimmu.2021.790119/full), [Selitsky et al., 2019](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0647-5)). Para a diversidade, os outores utilizaram o cálculo da Entropia de Shannon. Também calculei a Entropia de Shannon, seguindo o algoritmo dos desenvolvedores do TRUST4 (ferramenta que estou utilizando para extrair e quantificar os receptores).
 
 
-# Metodologia
+# Resultados
 
 Iniciei a avaliação da presença de TCR e BCR nos grupos LSP e HSP de ACC comparando as
-contagens brutas, ou seja, a quantidade de vezes que o TRUST4 encontrou uma mesma sequência de TCR/BCR (Figura 1A). Calculei a expressão de TCR e BCR dividindo o counts pelo número de leituras da amostra. A expressão de TCR e BCR normalizado pelo total de leituras é apresentado na FIgura 1B. Em seguida calculei a diversidade medida pela entropia de Shannon afim de considerar não apenas o número , mas também a distribuição de tamanho dos clones (Figura 1.C). 
+contagens brutas, ou seja, a quantidade de vezes que o TRUST4 encontrou uma mesma sequência de TCR/BCR (Figura 1A). Calculei a expressão de TCR e BCR dividindo o counts pelo número de leituras da amostra conforme a fórmula mencionada acima (Figura 1B). Em seguida calculei a diversidade medida pela entropia de Shannon afim de considerar não apenas o número, mas também a distribuição de tamanho dos clones (Figura 1.C).
 
-![Análise de diversidade](../figures/diversity_retrato.pdf){width=650px}
+Observei uma expressão e diversidade maior de IGH, IGK, IGL, TRA, e TRB em amostras LSP, condizendo com o heatmap que discutimos anteriormente. Para TRD e TRG as contagens eram baixas, a maioria foi zero. Essa baixa contagem de TRD e TRG também foi observado em outros trabalhos inclusive este artigo de referência.
+
+A expressão do TCR foi mais baixa do que BCR em LSP [média (TCR) = 5,04e-07; média (BCR) = 5,35e-05; p = 1,04e-07], assim como em HSP [média (TCR) = 2.78e-08; média (BCR) = 1.28e-05; p = 1.33e-09]. Embora a contagem, expressão e diversidade tenha sido significativamente correlacionada, especialmente em HSP (Figuras 1D, E).
+
+Vale ressaltar que a correlação em LSP foi mais alta que as correlações em LSP
+
+![Análise de diversidade. Boxplots mostrando contagem de IGH, IGK, IGL TRA e TRB (A), expressão (B) e entropias de Shannon (C). Os valores de p correspondem às diferenças estatísticas do teste de Wilcoxon. Gráfico de correlação para LSP (D) e HSP (E). Os números correspondem ao coeficiente de Pearson e os asteriscos indicam as correlações com valor p abaixo de 0,05.](../figures/diversity_retrato.pdf){width=650px}
 
 
 
